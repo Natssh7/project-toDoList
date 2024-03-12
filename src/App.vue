@@ -1,8 +1,6 @@
 <template>
-  <nav>
-    <router-link to="/login"></router-link>
-  </nav>
   <router-view/>
+  <MainFooter/>
 </template>
 
 <style>
@@ -27,3 +25,13 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
+
+<script>
+import MainFooter from '@/components/MainFooter.vue'
+
+export default {
+  components: {
+    MainFooter
+  }
+}
+</script>
