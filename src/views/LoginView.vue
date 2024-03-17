@@ -41,7 +41,7 @@
           class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-[75px] rounded focus:outline-none focus:shadow-outline"
           type="submit"
           >
-            Sign In
+            Log In
           </button>
         </div>
       </div>
