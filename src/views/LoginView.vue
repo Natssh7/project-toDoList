@@ -10,14 +10,13 @@
         <form @submit.prevent="handleSubmit" class="max-w-lg h-[14rem] space-y-4 p-4 bg-gray-500 rounded-lg">
           <div>
             <label class="block text-gray-200 text-sm font-bold mb-2" for="username">
-              Email or Username
+              Email
             </label>
             <input
-            class="w-full px-3 py-2 placeholder-gray-400 border rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:shadow-outline-blue"
-            id="username"
-            type="text"
-            v-model="username"
-            required
+              type="email"
+              id="username"
+              class="mt-1 p-2 border w-full rounded-md"
+              v-model="user.email"
             />
           </div>
           <div>
@@ -25,19 +24,19 @@
               Password
             </label>
             <input
-            class="w-full px-3 py-2 placeholder-gray-400 border rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:shadow-outline-blue"
-            id="password"
-            type="password"
-            v-model="password"
-            required
+              type="password"
+              id="password"
+              class="mt-1 p-2 border w-full rounded-md"
+              v-model="user.password"
             />
           </div>
           <div>
-            <label class="block text-gray-200 hover:text-gray-800 text-sm font-bold mb-2">Don't have an account? Sign In</label>
+            <router-link :to="{ name: 'signin' }" class="block text-gray-200 hover:text-gray-800 text-sm font-bold mb-2">Don't have an account? Sign In</router-link>
           </div>
         </form>
         <div class="flex items-center justify-center">
           <button
+          @click="login"
           class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-[75px] rounded focus:outline-none focus:shadow-outline"
           type="submit"
           >
@@ -53,6 +52,7 @@
 <script>
 // @ is an alias to /src
 import ToDoHeader from '@/components/ToDoHeader.vue'
+import UserDataService from '@/services/UserDataService.js'
 
 export default {
   components: {
@@ -60,15 +60,27 @@ export default {
   },
   data () {
     return {
-      username: '',
-      password: '',
-      remember: false
+      message: null,
+      user: {
+        username: '',
+        password: ''
+      }
     }
   },
   methods: {
-    handleSubmit () {
-      // Submit form data here
-      alert('Form submitted!')
+    login () {
+      UserDataService.postLogin(this.user)
+        .then(response => {
+          console.log(response.data)
+          // localStorage.setItem('token', response.data.token)
+          this.$store.dispatch('user', response.data.user)
+          this.$router.push({ name: 'task' })
+        })
+        .catch(error => {
+          // Handle the error here
+          this.message = error.response.data.message
+          // console.log(error.response.data.body.message)
+        })
     }
   }
 }

@@ -1,97 +1,95 @@
 const db = require('../models')
-const Product = db.task
+const Task = db.task
 
 exports.findAll = (req, res) => {
-    Product.findAll()
+    Task.findAll()
         .then(data => {
             res.send(data)
         })
         .catch(err => {
             res.status(500).send({
-                message: 'Could not find the data'
+                message: 'Could not find the tasks'
             })
         })
 }
 
 exports.create = (req, res) => {
-    // console.log(req.body)
-    if(!req.body.name) {
+    if (!req.body.name) {
         res.status(400).send({
             message: "The Name is mandatory"
         })
         return;
     }
-    Product.create(req.body)
-    .then(data => {
-        res.send(data)
-    })
-    .catch(err => {
-        res.status(500).send({
-            message: 'Could not insert the data'
-        })
-    })
-}
-
-exports.findOne = (req, res) => {
-    const id = req.params.id
-    Product.findByPk(id)
+    Task.create(req.body)
         .then(data => {
             res.send(data)
         })
         .catch(err => {
             res.status(500).send({
-                message: 'Could not find the data'
+                message: 'Could not insert the task'
+            })
+        })
+}
+
+exports.findOne = (req, res) => {
+    const id = req.params.id
+    Task.findByPk(id)
+        .then(data => {
+            res.send(data)
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: 'Could not find the task'
             })
         })
 }
 
 exports.update = (req, res) => {
     const id = req.params.id
-    Product.update(req.body, {
+    Task.update(req.body, {
         where: {id: id}
     })
     .then(num => {
         if(num == 1){
             res.send(
                 {
-                    message: 'Product Updated'
+                    message: 'Task Updated'
                 })
         }else{
             res.send(
                 {
-                    message: 'Product not found'
+                    message: 'Task not found'
                 })
         }
     })
     .catch(err => {
         res.status(500).send({
-            message: 'Could not update the product'
+            message: 'Could not update the task'
         })
     })
 }
 
 exports.delete = (req, res) => {
     const id = req.params.id
-    Product.destroy({
+    Task.destroy({
         where: {id: id}
     })
     .then(num => {
         if(num == 1){
             res.send(
                 {
-                    message: 'Product deleted'
+                    message: 'Task deleted'
                 })
         }else{
             res.send(
                 {
-                    message: 'Product not found'
+                    message: 'Task not found'
                 })
         }
     })
     .catch(err => {
         res.status(500).send({
-            message: 'Could not delete the product'
+            message: 'Could not delete the task'
         })
     })
-
 }

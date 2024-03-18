@@ -22,8 +22,8 @@ app.get('/', (req, res) => {
     res.json({message: 'Welcome'})
 })
 
-require('./app/routes/product.route')(app)
-require('./app/routes/user.route')(app)
+require('./app/routes/task.route.js')(app)
+require('./app/routes/user.route.js')(app)
 
 const PORT = 8080
 app.listen(PORT, () => {

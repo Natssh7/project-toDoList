@@ -24,8 +24,8 @@ const routes = [
     component: LoginView
   },
   {
-    path: '/tasks',
-    name: 'tasks',
+    path: '/task',
+    name: 'task',
     component: MainView
   },
   {

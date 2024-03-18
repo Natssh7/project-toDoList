@@ -87,6 +87,7 @@
 
 <script>
 import LogoutHeader from '@/components/LogoutHeader.vue'
+import TaskDataService from '@/services/TaskDataService.js'
 
 export default {
   components: {
@@ -101,13 +102,25 @@ export default {
   },
   methods: {
     addTask () {
+      // Define the new task object
       const newTask = {
-        id: Date.now(),
-        description: this.newTaskDescription,
+        name: this.newTaskDescription,
+        description: this.goalDescription,
         status: 'To-Do'
       }
-      this.tasks.push(newTask)
-      this.newTask = ''
+
+      // Use the TaskDataService instance to send a POST request to your server
+      TaskDataService.create(newTask)
+        .then(response => {
+        // If the task is successfully created on the server, add it to the tasks array
+        // Assuming the server responds with the created task object, including its ID
+          this.tasks.push(response.data)
+          this.newTaskDescription = '' // Clear the input field
+        })
+        .catch(error => {
+          console.error('There was a problem adding the task:', error)
+          // Handle error (e.g., show an error message)
+        })
     },
     markDone (id, status) {
       const task = this.tasks.find((t) => t.id === id)
