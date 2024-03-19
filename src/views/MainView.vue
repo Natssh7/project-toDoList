@@ -100,6 +100,28 @@ export default {
       tasks: []
     }
   },
+  /* mounted () {
+    TaskDataService.getAll()
+      .then(response => {
+        this.tasks = response.data
+        console.log('Task data', this.tasks)
+      })
+  }, */
+  mounted () {
+    const savedTasks = localStorage.getItem('tasks')
+    if (savedTasks) {
+      this.tasks = JSON.parse(savedTasks)
+    }
+    TaskDataService.getAll()
+      .then(response => {
+        this.tasks = response.data
+        console.log('Task data', this.tasks)
+        localStorage.setItem('tasks', JSON.stringify(this.tasks))
+      })
+      .catch(error => {
+        console.error('Error fetching tasks:', error)
+      })
+  },
   methods: {
     addTask () {
       // Define the new task object
@@ -115,21 +137,28 @@ export default {
         // If the task is successfully created on the server, add it to the tasks array
         // Assuming the server responds with the created task object, including its ID
           this.tasks.push(response.data)
-          this.newTaskDescription = '' // Clear the input field
+          this.newTaskDescription = ''
+          localStorage.setItem('tasks', JSON.stringify(this.tasks))
         })
         .catch(error => {
           console.error('There was a problem adding the task:', error)
-          // Handle error (e.g., show an error message)
         })
     },
     markDone (id, status) {
       const task = this.tasks.find((t) => t.id === id)
       if (task) {
         task.status = status
+        localStorage.setItem('tasks', JSON.stringify(this.tasks))
       }
     },
     removeTask (id) {
       this.tasks = this.tasks.filter((t) => t.id !== id)
+      localStorage.setItem('tasks', JSON.stringify(this.tasks))
+    },
+    updateTasks (index, data) {
+      this.tasks[index].name = data.name
+      this.tasks[index].description = data.description
+      this.tasks[index].status = data.status
     }
   }
 }
