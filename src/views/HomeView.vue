@@ -14,7 +14,7 @@
           <div class="my-4">
             <router-link
               :to="{ name: 'login' }"
-              class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-3 px-32 rounded focus:outline-none focus:shadow-outline"
+              class="bg-gray-500 hover:bg-gray-800 text-white font-bold py-3 px-32 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Log In

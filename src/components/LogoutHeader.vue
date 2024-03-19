@@ -23,7 +23,7 @@ export default {
         .then(response => {
           localStorage.removeItem('token')
           this.$store.dispatch('user', null)
-          this.$router.push('login')
+          this.$router.push({ name: 'home' })
         })
     }
   }
