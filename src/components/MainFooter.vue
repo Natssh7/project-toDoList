@@ -7,6 +7,12 @@
         <li>
           <router-link :to="{name: 'about'}" class="hover:underline me-4 md:me-6">About</router-link>
         </li>
+        <li>
+          <router-link :to="{name: 'home'}" class="hover:underline me-4 md:me-6">HomePage</router-link>
+        </li>
+        <li>
+          <router-link :to="{name: 'signin'}" class="hover:underline me-4 md:me-6">SignIn</router-link>
+        </li>
       </ul>
     </div>
   </footer>
