@@ -3,12 +3,13 @@ import LoginView from '@/views/LoginView.vue'
 import MainView from '@/views/MainView.vue'
 import SignInView from '@/views/SignInView.vue'
 import AboutView from '@/views/AboutView.vue'
+import HomeView from '@/views/HomeView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: LoginView
+    component: HomeView
   },
   {
     path: '/about',

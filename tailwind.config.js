@@ -5,7 +5,12 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: { backgroundImage: { 'my-image': "url('/img/blurredImg.jpg')", }, },
+    extend: {
+      backgroundImage: {
+        'my-image': "url('/img/blurredImg.jpg')",
+        'main-image': "url('/img/MainMenuImg.png')",
+      },
+    },
   },
   plugins: [],
 }

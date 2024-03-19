@@ -2,7 +2,7 @@
   <div>
     <ToDoHeader/>
     <div class="bg-my-image bg-no-repeat bg-cover bg-center bg-fixed">
-    <div class="flex items-center justify-center min-h-screen bg-[url('https://github.com/hyprwm/Hyprland/blob/main/assets/wall0.png')]">
+    <div class="flex items-center justify-center min-h-screen">
       <div class="w-full max-w-lg h-[29rem] px-6 py-4 bg-gray-300 rounded-lg shadow-md text-left space-y-6">
         <div class="flex max-w-lg h-[55px] justify-center bg-gray-500 text-white rounded-lg">
           <h1 class="text-3xl font-bold">Sign In</h1>
